@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DbConnectWithCore
 {
     class MessageSender
     {
-        void Sender()
+        public MessageSender()
         {
-            //Program.SendMessage += WriteSender;
-            Program.SendMessage += ReadSender;
+            JsonFormatter.FileWritten += ReadSender;
+            JsonFormatter.FileRead += WriteSender;
         }
-
         void WriteSender()
         {
             Console.WriteLine("Файл успешно записан!");
+            JsonFormatter.FileWritten -= WriteSender;
         }
         void ReadSender()
         {
             Console.WriteLine("Файл успешно прочитан!");
+            JsonFormatter.FileRead -= ReadSender;
         }
     }
 }
